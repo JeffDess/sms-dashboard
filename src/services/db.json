@@ -1,0 +1,36 @@
+{
+  "auth": [{
+    "email" : "user@domain.com",
+    "password": "12345",
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlVzZXIgMSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1MTYyMzkwMjJ9.a2Dyj-Nx1ORmKIJ4sAn3wv9e3yP_YFlKcMWVrGpKIMc"
+  },
+  {
+    "email" : "admin@domain.com",
+    "password": "12345",
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFkbWluIDEiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE1MTYyMzkwMjJ9.iNLdeip9x72YrsJEYNCmAn7_DQfqADBQKbqnUSO19Lw"
+  }],
+  "subscriptions": [{
+    "phoneNumber": "+14155551234",
+    "list": "prospects",
+    "country": "Canada"
+  },
+  {
+    "phoneNumber": "+14155552345",
+    "list": "customers",
+    "country": "United States"
+  },
+  {
+    "phoneNumber": "+14155553456",
+    "list": "employees",
+    "country": "France"
+  },
+  {
+    "phoneNumber": "+14155554567",
+    "list": "prospects",
+    "country": "France"
+  }],
+  "messages": [{
+    "content": "Lorem ipsum dolor si amet",
+    "timestamp": "2019-05-16T21:05:30-05:00"
+  }]
+}
