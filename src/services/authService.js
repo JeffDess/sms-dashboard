@@ -1,6 +1,6 @@
 import http, { setJwt } from './httpService'
 import jwtDecode from 'jwt-decode'
-import db from './db.json'
+import db from './../db.json'
 
 setJwt(getJwt())
 
