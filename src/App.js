@@ -15,18 +15,37 @@ import './App.css'
 
 function App () {
   const [user] = useState(auth.getCurrentUser())
+  const [activeTab, setActiveTab] = useState(false)
 
   return (
     <React.Fragment>
-      <Navbar username={user && user.name} />
+      <Navbar username={user && user.name} activeTab={activeTab} />
       <main>
         <Switch>
           <Route path='/login' component={LoginForm} />
           <Route path='/logout' component={Logout} />
           <ProtectedRoute path='/users/:id' component={UserForm} />
-          <Route path='/compose' component={Compose} />
-          <Route path='/subscriptions' component={Subscriptions} />
-          <Route path='/log' component={MessagesLog} />
+          <Route
+            path='/compose'
+            render={() => {
+              setActiveTab(0)
+              return <Compose />
+            }}
+          />
+          <Route
+            path='/subscriptions'
+            render={() => {
+              setActiveTab(1)
+              return <Subscriptions />
+            }}
+          />
+          <Route
+            path='/log'
+            render={() => {
+              setActiveTab(2)
+              return <MessagesLog />
+            }}
+          />
           <Route path='/not-found' component={NotFound} />
           <Route path='/' component={Home} exact />
           <Redirect to='/not-found' />

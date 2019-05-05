@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -33,13 +33,8 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Navbar ({ username }) {
-  const [value, setValue] = useState(0)
+function Navbar ({ username, activeTab }) {
   const classes = useStyles()
-
-  const handleChange = (event, value) => {
-    setValue(value)
-  }
 
   return (
     <nav className={classes.root}>
@@ -72,7 +67,7 @@ function Navbar ({ username }) {
             </Button>
           )}
         </Toolbar>
-        <Tabs className={classes.tabs} value={value} onChange={handleChange}>
+        <Tabs className={classes.tabs} value={activeTab}>
           <Tab
             label={
               <React.Fragment>
