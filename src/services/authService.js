@@ -15,11 +15,13 @@ export async function login (user) {
   //   email: user.username,
   //   password: user.password
   // }
-  const res = await http.post(`/auth`, body)
-  const jwt = res.data
+  // const res = await http.post(`/auth`, body)
+  // const jwt = res.data
+  const jwt = body
 
   window.localStorage.setItem('token', jwt)
-  return res
+  // return res
+  return { status: 200, data: body }
 }
 
 export async function loginWithJwt (jwt) {
