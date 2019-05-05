@@ -1,12 +1,12 @@
 import React from 'react'
 
-const ListGroup = ({
+function ListGroup ({
   groups,
   onGroupChange,
   activeGroup,
   textProp,
   valueProp
-}) => {
+}) {
   return (
     <ul className='list-group'>
       {groups.map(g => (

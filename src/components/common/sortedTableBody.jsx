@@ -5,7 +5,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import { stableSort, getSorting } from '../../utils/sort'
 
-const SortedTableBody = ({ order, orderBy, rows, page, rowsPerPage }) => {
+function SortedTableBody ({ order, orderBy, rows, page, rowsPerPage }) {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
 

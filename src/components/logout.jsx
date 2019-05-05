@@ -1,15 +1,13 @@
-import { Component } from 'react'
+import { useEffect } from 'react'
 import auth from '../services/authService'
 
-class Logout extends Component {
-  state = {}
-  componentDidMount () {
+function Logout () {
+  useEffect(() => {
     auth.logout()
     window.location = '/'
-  }
-  render () {
-    return null
-  }
+  })
+
+  return null
 }
 
 export default Logout

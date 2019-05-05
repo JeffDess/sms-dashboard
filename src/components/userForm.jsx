@@ -5,37 +5,40 @@ import { saveUser } from '../services/userService'
 import auth from '../services/authService'
 
 class UserForm extends Form {
-  state = {
-    data: {
-      name: '',
-      username: '',
-      password: ''
-    },
-    errors: {}
+  constructor (props) {
+    super(props)
+    this.state = {
+      data: {
+        name: '',
+        username: '',
+        password: ''
+      },
+      errors: {}
+    }
+
+    this.schema = {
+      name: Joi.string()
+        .label('Name')
+        .required()
+        .error(() => ({ message: 'Name is required.' })),
+      username: Joi.string()
+        .required()
+        .label('Username')
+        .error(() => ({ message: 'Username is required.' }))
+        .email()
+        .error(() => ({ message: 'Username must be a valid email.' })),
+      password: Joi.string()
+        .required()
+        .label('Password')
+        .error(() => ({ message: 'Password is required.' }))
+        .min(5)
+        .error(() => ({
+          message: 'Password must be at least 5 characters long.'
+        }))
+    }
   }
 
-  schema = {
-    name: Joi.string()
-      .label('Name')
-      .required()
-      .error(() => ({ message: 'Name is required.' })),
-    username: Joi.string()
-      .required()
-      .label('Username')
-      .error(() => ({ message: 'Username is required.' }))
-      .email()
-      .error(() => ({ message: 'Username must be a valid email.' })),
-    password: Joi.string()
-      .required()
-      .label('Password')
-      .error(() => ({ message: 'Password is required.' }))
-      .min(5)
-      .error(() => ({
-        message: 'Password must be at least 5 characters long.'
-      }))
-  }
-
-  doSumbit = async () => {
+  async doSumbit () {
     try {
       const res = await saveUser(this.state.data)
       if (res.status === 200) {

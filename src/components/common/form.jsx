@@ -4,12 +4,15 @@ import Input from './input'
 import Dropdown from './dropdown'
 
 class Form extends Component {
-  state = {
-    data: {},
-    errors: {}
+  constructor (props) {
+    super(props)
+    this.state = {
+      data: {},
+      errors: {}
+    }
   }
 
-  validate = () => {
+  validate () {
     const result = Joi.validate(this.state.data, this.schema, {
       abortEarly: false
     })
@@ -21,7 +24,7 @@ class Form extends Component {
     return errors
   }
 
-  validateProp = ({ name, value }) => {
+  validateProp ({ name, value }) {
     const obj = { [name]: value }
     const schema = { [name]: this.schema[name] }
     const { error } = Joi.validate(obj, schema)
@@ -29,7 +32,7 @@ class Form extends Component {
     return error ? error.details[0].message : null
   }
 
-  handleSubmit = e => {
+  handleSubmit (e) {
     e.preventDefault()
     const errors = this.validate()
     this.setState({ errors: errors || {} })
@@ -37,7 +40,7 @@ class Form extends Component {
     this.doSumbit()
   }
 
-  handleChange = ({ currentTarget: input }) => {
+  handleChange ({ currentTarget: input }) {
     const errors = { ...this.state.errors }
     const errorMsg = this.validateProp(input)
     if (errorMsg) errors[input.name] = errorMsg

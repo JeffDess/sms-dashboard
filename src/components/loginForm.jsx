@@ -5,26 +5,30 @@ import Form from './common/form'
 import auth from '../services/authService'
 
 class LoginForm extends Form {
-  state = {
-    data: {
-      username: '',
-      password: ''
-    },
-    errors: {}
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      data: {
+        email: '',
+        password: ''
+      },
+      errors: {}
+    }
+
+    this.schema = {
+      email: Joi.string()
+        .required()
+        .label('Email')
+        .error(() => ({ message: 'Email is required.' })),
+      password: Joi.string()
+        .required()
+        .label('Password')
+        .error(() => ({ message: 'Password is required.' }))
+    }
   }
 
-  schema = {
-    username: Joi.string()
-      .required()
-      .label('Username')
-      .error(() => ({ message: 'Username is required.' })),
-    password: Joi.string()
-      .required()
-      .label('Password')
-      .error(() => ({ message: 'Password is required.' }))
-  }
-
-  doSumbit = async () => {
+  async doSumbit () {
     try {
       const res = await auth.login(this.state.data)
       if (res.status === 200) {
@@ -46,7 +50,7 @@ class LoginForm extends Form {
       <div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit} action=''>
-          {this.renderInput('username', 'Username')}
+          {this.renderInput('email', 'Email')}
           {this.renderInput('password', 'Password', 'password')}
           {this.renderBtn('Login')}
         </form>

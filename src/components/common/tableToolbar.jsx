@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-let TableToolbar = ({ caption }) => {
+function TableToolbar ({ caption }) {
   const classes = useStyles()
   return (
     <Toolbar>

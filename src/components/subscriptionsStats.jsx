@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { plurialize } from '../utils/strings'
 
-const SubscriptionsStats = ({ headers, rows }) => {
+function SubscriptionsStats ({ headers, rows }) {
   return (
     <Grid container spacing={2}>
       {headers.map(r => (

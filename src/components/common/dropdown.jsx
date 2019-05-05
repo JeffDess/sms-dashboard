@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Dropdown = ({ name, label, options, error, ...rest }) => {
+function Dropdown ({ name, label, options, error, ...rest }) {
   return (
     <div className='form-group'>
       <label htmlFor={name}>{label}</label>

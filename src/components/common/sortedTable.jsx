@@ -25,14 +25,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const SortedTable = ({
-  caption,
-  headers,
-  rows,
-  rowsPerPage,
-  order,
-  orderBy
-}) => {
+function SortedTable ({ caption, headers, rows, rowsPerPage, order, orderBy }) {
   const [sOrder, setOrder] = React.useState(order)
   const [sOrderBy, setOrderBy] = React.useState(orderBy)
   const [sPage, setPage] = React.useState(0)

@@ -18,7 +18,7 @@ function generateHeaders (rows) {
   ].reduce((acc, x) => acc.indexOf(x) && x)
 }
 
-const Subscriptions = () => {
+function Subscriptions () {
   const [headers] = React.useState(generateHeaders(db.subscriptions))
   const [rows] = React.useState(db.subscriptions)
 

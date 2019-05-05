@@ -6,7 +6,7 @@ import TableRow from '@material-ui/core/TableRow'
 import TableSortLabel from '@material-ui/core/TableSortLabel'
 import Tooltip from '@material-ui/core/Tooltip'
 
-const SortedTableHeader = ({ order, orderBy, headers, onCreateSort }) => {
+function SortedTableHeader ({ order, orderBy, headers, onCreateSort }) {
   return (
     <TableHead>
       <TableRow>
