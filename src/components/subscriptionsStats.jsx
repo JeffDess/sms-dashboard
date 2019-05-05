@@ -22,7 +22,10 @@ function SubscriptionsStats ({ headers, rows }) {
                 {plurialize(r.label)}
               </Typography>
               <Typography variant='h3'>
-                {[...new Set(rows.map(p => p[r.id]))].length}
+                {
+                  [...new Set(rows.filter(n => !!n[r.id]).map(p => p[r.id]))]
+                    .length
+                }
               </Typography>
             </CardContent>
           </Card>
