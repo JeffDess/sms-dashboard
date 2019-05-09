@@ -114,7 +114,7 @@ function Navbar ({ username, activeTab }) {
 }
 
 Navbar.propTypes = {
-  username: PropTypes.string.isRequired
+  username: PropTypes.string
 }
 
 export default Navbar
