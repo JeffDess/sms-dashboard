@@ -1,8 +1,8 @@
 import React from 'react'
 import Joi from 'joi-browser'
-import Form from './common/form'
-import { saveUser } from '../services/userService'
-import auth from '../services/authService'
+import Form from '../common/form/form'
+import { saveUser } from '../../services/userService'
+import auth from '../../services/authService'
 
 class UserForm extends Form {
   constructor (props) {

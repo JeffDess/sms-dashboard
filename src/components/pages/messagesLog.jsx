@@ -1,8 +1,8 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import SortedTable from './common/sortedTable'
-import { camelToNormalCase } from '../utils/strings'
-import db from '../db.json'
+import SortedTable from '../common/table/sortedTable'
+import { camelToNormalCase } from '../../utils/strings'
+import db from '../../db.json'
 
 function generateHeaders (rows) {
   return [

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
-import { stableSort, getSorting } from '../../utils/sort'
+import { stableSort, getSorting } from '../../../utils/sort'
 
 function SortedTableBody ({ order, orderBy, rows, page, rowsPerPage }) {
   const emptyRows =
