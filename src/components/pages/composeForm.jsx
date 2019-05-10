@@ -48,14 +48,7 @@ const values = {
 function Compose () {
   const classes = useStyles()
   const [data, setData] = useState({ msg: '', unsubMsg: values.unsubMsg })
-  const [filters, setFilters] = useState({
-    country: {
-      Canada: false,
-      France: false,
-      Brazil: false
-    },
-    list: { prospects: false, customers: false, employees: false }
-  })
+  const [filters, setFilters] = useState({})
   const [errors, setErrors] = useState({})
 
   const doSubmit = () => {

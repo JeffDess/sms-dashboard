@@ -21,7 +21,7 @@ function Checkboxes ({ listId, label, options, filters, onChange }) {
           key={o}
           control={
             <Checkbox
-              checked={filters[listId] && !!filters[listId][o]}
+              checked={(filters[listId] && !!filters[listId][o]) || false}
               onChange={() => onChange(listId, o)}
               value={o}
             />
