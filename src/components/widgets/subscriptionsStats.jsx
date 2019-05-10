@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { plurialize } from '../../utils/strings'
+import withHeaders from '../withHeaders'
 
 function SubscriptionsStats ({ headers, rows }) {
   return (
@@ -35,4 +36,4 @@ function SubscriptionsStats ({ headers, rows }) {
   )
 }
 
-export default SubscriptionsStats
+export default withHeaders(SubscriptionsStats)

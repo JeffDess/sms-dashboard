@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import TableToolbar from './tableToolbar'
 import SortedTableHeader from './sortedTableHeader'
 import SortedTableBody from './sortedTableBody'
+import withHeaders from '../../withHeaders'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -106,4 +107,4 @@ SortedTable.propTypes = {
   rowsPerPage: PropTypes.number.isRequired
 }
 
-export default SortedTable
+export default withHeaders(SortedTable)
