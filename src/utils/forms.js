@@ -1,6 +1,15 @@
 import Joi from 'joi'
 
-const formHelper = (schema, data, doSubmit, setErrors, setData, errors) => {
+const formHelper = (
+  schema,
+  data,
+  doSubmit,
+  setErrors,
+  setData,
+  errors,
+  filters,
+  setFilters
+) => {
   function validateForm (data, schema) {
     const result = Joi.validate(data, schema, {
       abortEarly: false
@@ -51,11 +60,21 @@ const formHelper = (schema, data, doSubmit, setErrors, setData, errors) => {
       setData({ ...data, [input.id]: input.value })
     }
   })
+  const onCheck = (filters, setFilters) => ({
+    handleCheck: (filter, prop) => {
+      const value = (filters[filter] && filters[filter][prop] === true) || false
+      setFilters({
+        ...filters,
+        [filter]: { ...filters[filter], [prop]: !value }
+      })
+    }
+  })
 
   return Object.assign(
     {},
     onSubmit(data, schema, doSubmit),
     onChange(data, setData, errors, setErrors),
+    onCheck(filters, setFilters),
     validate(data, schema)
   )
 }

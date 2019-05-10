@@ -7,6 +7,8 @@ import Form from '../common/form/form'
 import formHelper from '../../utils/forms'
 import SubmitButton from '../common/form/submitButton'
 import InputField from '../common/form/inputField'
+import FormFilters from '../common/form/formFilters'
+import db from '../../db.json'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -46,6 +48,14 @@ const values = {
 function Compose () {
   const classes = useStyles()
   const [data, setData] = useState({ msg: '', unsubMsg: values.unsubMsg })
+  const [filters, setFilters] = useState({
+    country: {
+      Canada: false,
+      France: false,
+      Brazil: false
+    },
+    list: { prospects: false, customers: false, employees: false }
+  })
   const [errors, setErrors] = useState({})
 
   const doSubmit = () => {
@@ -61,7 +71,16 @@ function Compose () {
     }
   }
 
-  const helper = formHelper(schema, data, doSubmit, setErrors, setData, errors)
+  const helper = formHelper(
+    schema,
+    data,
+    doSubmit,
+    setErrors,
+    setData,
+    errors,
+    filters,
+    setFilters
+  )
 
   return (
     <React.Fragment>
@@ -76,6 +95,16 @@ function Compose () {
           doSubmit={doSubmit}
           className={classes.container}
         >
+          <fieldset className={classes.fieldset}>
+            <Typography component='legend' variant='h5'>
+              Filters
+            </Typography>
+            <FormFilters
+              data={db.subscriptions}
+              onChange={helper.handleCheck}
+              filters={filters}
+            />
+          </fieldset>
           <fieldset className={classes.fieldset}>
             <Typography component='legend' variant='h5'>
               Content
@@ -96,9 +125,7 @@ function Compose () {
             />
           </fieldset>
           <div className={classes.btnContainer}>
-            <SubmitButton onFormChange={!!helper.validate()}>
-              Submit
-            </SubmitButton>
+            <SubmitButton onFormChange={!!helper.validate()}>Send</SubmitButton>
           </div>
         </Form>
       </Paper>

@@ -1,7 +1,9 @@
 import React from 'react'
 import { camelToNormalCase } from '../utils/strings'
+import db from '../db.json'
 
-function withHeaders (Component, rows) {
+function withHeaders (Component) {
+  const rows = db.subscriptions
   const headers = [
     ...new Set(
       rows.map(s =>
