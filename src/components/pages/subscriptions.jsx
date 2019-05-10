@@ -5,7 +5,7 @@ import SubscriptionsStats from '../widgets/subscriptionsStats'
 import db from '../../db.json'
 
 function Subscriptions () {
-  const [rows] = React.useState(db.subscriptions)
+  const rows = db.subscriptions
 
   return (
     <React.Fragment>
