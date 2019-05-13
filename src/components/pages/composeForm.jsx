@@ -9,6 +9,7 @@ import SubmitButton from '../common/form/submitButton'
 import InputField from '../common/form/inputField'
 import FormFilters from '../common/form/formFilters'
 import db from '../../db.json'
+import { sendSms } from '../../services/smsService'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -72,15 +73,10 @@ function Compose () {
       )
       .map(s => s.phoneNumber)
 
+    const msg = `${data.msg}\n${data.unsubMsg}`
+
     try {
-      // TODO Implement backend call
-      console.log(
-        `Submitted message:\n${data.msg}
-        \n${data.unsubMsg}
-        \n${recipients.length} recipient${
-  recipients.length !== 0 ? `s: ${recipients}` : ''
-}`
-      )
+      sendSms(msg, recipients)
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const newErrors = { ...errors }
