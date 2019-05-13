@@ -45,6 +45,8 @@ const values = {
   unsubMsg: 'Reply STOP to unsubscribe.'
 }
 
+const subscriptions = db.subscriptions
+
 function Compose () {
   const classes = useStyles()
   const [data, setData] = useState({ msg: '', unsubMsg: values.unsubMsg })
@@ -52,9 +54,33 @@ function Compose () {
   const [errors, setErrors] = useState({})
 
   const doSubmit = () => {
+    const activeFilters = Object.entries(filters).map(f =>
+      Object.entries(f[1])
+        .filter(v => v[1] === true)
+        .map(r => {
+          return { [f[0]]: r[0] }
+        })
+    )
+
+    const recipients = subscriptions
+      .filter(s =>
+        activeFilters
+          .filter(a => a.length !== 0)
+          .every(r =>
+            r.some(f => s[Object.entries(f)[0][0]] === Object.entries(f)[0][1])
+          )
+      )
+      .map(s => s.phoneNumber)
+
     try {
       // TODO Implement backend call
-      console.log(`Submitted message:\n${data.msg}\n${data.unsubMsg}`)
+      console.log(
+        `Submitted message:\n${data.msg}
+        \n${data.unsubMsg}
+        \n${recipients.length} recipient${
+  recipients.length !== 0 ? `s: ${recipients}` : ''
+}`
+      )
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const newErrors = { ...errors }
@@ -93,7 +119,7 @@ function Compose () {
               Filters
             </Typography>
             <FormFilters
-              data={db.subscriptions}
+              data={subscriptions}
               onChange={helper.handleCheck}
               filters={filters}
             />
