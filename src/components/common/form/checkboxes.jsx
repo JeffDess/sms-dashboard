@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Checkboxes ({ listId, label, options, filters, onChange }) {
+function Checkboxes ({ listId, label, options, filters, onCheck }) {
   const classes = useStyles()
   return (
     <FormControl component='fieldset' className={classes.formControl}>
@@ -22,7 +22,7 @@ function Checkboxes ({ listId, label, options, filters, onChange }) {
           control={
             <Checkbox
               checked={(filters[listId] && !!filters[listId][o]) || false}
-              onChange={() => onChange(listId, o)}
+              onChange={() => onCheck(listId, o)}
               value={o}
             />
           }

@@ -116,7 +116,8 @@ function Compose () {
             </Typography>
             <FormFilters
               data={subscriptions}
-              onChange={helper.handleCheck}
+              onCheck={helper.handleCheck}
+              onSelect={helper.handleSelect}
               filters={filters}
             />
           </fieldset>

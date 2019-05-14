@@ -70,11 +70,21 @@ const formHelper = (
     }
   })
 
+  const onSelect = (filters, setFilters) => ({
+    handleSelect: (filter, prop) => {
+      setFilters({
+        ...filters,
+        [filter]: { [prop]: true }
+      })
+    }
+  })
+
   return Object.assign(
     {},
     onSubmit(data, schema, doSubmit),
     onChange(data, setData, errors, setErrors),
     onCheck(filters, setFilters),
+    onSelect(filters, setFilters),
     validate(data, schema)
   )
 }

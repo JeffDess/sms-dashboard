@@ -1,8 +1,9 @@
 import React from 'react'
 import Checkboxes from './checkboxes'
 import withHeaders from '../../withHeaders'
+import Selects from './selects'
 
-function FormFilter ({ headers, data, filters, onChange }) {
+function FormFilter ({ headers, data, filters, onCheck, onSelect }) {
   const selectedFilters =
     process.env.REACT_APP_DISTRIBUTION_FILTERS.split(',') || headers
 
@@ -20,16 +21,29 @@ function FormFilter ({ headers, data, filters, onChange }) {
       )
     ]
 
-    return (
-      <Checkboxes
-        key={f.id}
-        listId={f.id}
-        label={f.label}
-        filters={filters}
-        options={options}
-        onChange={onChange}
-      />
-    )
+    if (f.id !== 'country') {
+      return (
+        <Checkboxes
+          key={f.id}
+          listId={f.id}
+          label={f.label}
+          filters={filters}
+          options={options}
+          onCheck={onCheck}
+        />
+      )
+    } else {
+      return (
+        <Selects
+          key={f.id}
+          listId={f.id}
+          label={f.label}
+          filters={filters}
+          options={options}
+          onSelect={onSelect}
+        />
+      )
+    }
   })
 }
 
