@@ -11,7 +11,14 @@ function FormFilter ({ headers, data, filters, onChange }) {
   )
 
   return filterFields.map(f => {
-    const options = [...new Set(data.filter(d => !!d[f.id]).map(p => p[f.id]))]
+    const options = [
+      ...new Set(
+        data
+          .filter(d => !!d[f.id])
+          .map(p => p[f.id])
+          .sort()
+      )
+    ]
 
     return (
       <Checkboxes
