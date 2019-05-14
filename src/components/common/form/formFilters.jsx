@@ -2,16 +2,22 @@ import React from 'react'
 import Checkboxes from './checkboxes'
 import withHeaders from '../../withHeaders'
 import Selects from './selects'
+import { orderByProp } from '../../../utils/sort'
 
 function FormFilter ({ headers, data, filters, onCheck, onSelect }) {
   const selectedFilters =
-    process.env.REACT_APP_DISTRIBUTION_FILTERS.split(',') || headers
+    JSON.parse(process.env.REACT_APP_DISTRIBUTION_FILTERS) || headers
 
   const filterFields = headers.filter(h =>
-    selectedFilters.some(c => c === h.id)
+    selectedFilters.some(c => c.id === h.id)
   )
 
-  return filterFields.map(f => {
+  filterFields.forEach(x => {
+    x.type = selectedFilters.find(s => s.id === x.id).type || 'select'
+    x.order = selectedFilters.find(s => s.id === x.id).order || null
+  })
+
+  return orderByProp(filterFields, 'order').map(f => {
     const options = [
       ...new Set(
         data
@@ -21,28 +27,31 @@ function FormFilter ({ headers, data, filters, onCheck, onSelect }) {
       )
     ]
 
-    if (f.id !== 'country') {
-      return (
-        <Checkboxes
-          key={f.id}
-          listId={f.id}
-          label={f.label}
-          filters={filters}
-          options={options}
-          onCheck={onCheck}
-        />
-      )
-    } else {
-      return (
-        <Selects
-          key={f.id}
-          listId={f.id}
-          label={f.label}
-          filters={filters}
-          options={options}
-          onSelect={onSelect}
-        />
-      )
+    switch (f.type) {
+      case 'checkbox':
+        return (
+          <Checkboxes
+            key={f.id}
+            listId={f.id}
+            label={f.label}
+            filters={filters}
+            options={options}
+            onCheck={onCheck}
+          />
+        )
+      case 'select':
+        return (
+          <Selects
+            key={f.id}
+            listId={f.id}
+            label={f.label}
+            filters={filters}
+            options={options}
+            onSelect={onSelect}
+          />
+        )
+      default:
+        return null
     }
   })
 }
