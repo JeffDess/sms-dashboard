@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import { plurialize } from '../../utils/strings'
 import withHeaders from '../withHeaders'
 
-function SubscriptionsStats ({ headers, rows }) {
+function TableStats ({ headers, rows }) {
   return (
     <Grid container spacing={2}>
       {headers.map(r => (
@@ -36,4 +36,4 @@ function SubscriptionsStats ({ headers, rows }) {
   )
 }
 
-export default withHeaders(SubscriptionsStats)
+export default withHeaders(TableStats)
