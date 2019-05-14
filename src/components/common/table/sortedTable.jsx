@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import TableToolbar from './tableToolbar'
 import SortedTableHeader from './sortedTableHeader'
 import SortedTableBody from './sortedTableBody'
-import withHeaders from '../../withHeaders'
+import { generateHeaders } from '../../../utils/tables'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,11 +26,12 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function SortedTable ({ caption, headers, rows, rowsPerPage, order, orderBy }) {
+function SortedTable ({ caption, rows, rowsPerPage, order, orderBy }) {
   const [sOrder, setOrder] = React.useState(order)
   const [sOrderBy, setOrderBy] = React.useState(orderBy)
   const [sPage, setPage] = React.useState(0)
   const [sRowsPerPage, setRowsPerPage] = React.useState(rowsPerPage)
+  const headers = generateHeaders(rows)
 
   function handleRequestSort (event, property) {
     const isDesc = sOrderBy === property && sOrder === 'desc'
@@ -107,4 +108,4 @@ SortedTable.propTypes = {
   rowsPerPage: PropTypes.number.isRequired
 }
 
-export default withHeaders(SortedTable)
+export default SortedTable

@@ -4,9 +4,10 @@ import Grid from '@material-ui/core/Grid'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { plurialize } from '../../utils/strings'
-import withHeaders from '../withHeaders'
+import { generateHeaders } from '../../utils/tables'
 
-function TableStats ({ headers, rows }) {
+function TableStats ({ rows }) {
+  const headers = generateHeaders(rows)
   return (
     <Grid container spacing={2}>
       {headers.map(r => (
@@ -36,4 +37,4 @@ function TableStats ({ headers, rows }) {
   )
 }
 
-export default withHeaders(TableStats)
+export default TableStats

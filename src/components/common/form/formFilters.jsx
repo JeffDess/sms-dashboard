@@ -1,13 +1,13 @@
 import React from 'react'
 import Checkboxes from './checkboxes'
-import withHeaders from '../../withHeaders'
 import Selects from './selects'
 import { orderByProp } from '../../../utils/sort'
+import { generateHeaders } from '../../../utils/tables'
 
-function FormFilter ({ headers, data, filters, onCheck, onSelect }) {
+function FormFilter ({ data, filters, onCheck, onSelect }) {
+  const headers = generateHeaders(data)
   const selectedFilters =
     JSON.parse(process.env.REACT_APP_DISTRIBUTION_FILTERS) || headers
-
   const filterFields = headers.filter(h =>
     selectedFilters.some(c => c.id === h.id)
   )
@@ -56,4 +56,4 @@ function FormFilter ({ headers, data, filters, onCheck, onSelect }) {
   })
 }
 
-export default withHeaders(FormFilter)
+export default FormFilter
