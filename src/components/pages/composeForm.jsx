@@ -10,6 +10,7 @@ import InputField from '../common/form/inputField'
 import FormFilters from '../common/form/formFilters'
 import db from '../../db.json'
 import { sendSms } from '../../services/smsService'
+import { getRecipients } from '../../utils/compose'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -63,15 +64,7 @@ function Compose () {
         })
     )
 
-    const recipients = subscriptions
-      .filter(s =>
-        activeFilters
-          .filter(a => a.length !== 0)
-          .every(r =>
-            r.some(f => s[Object.entries(f)[0][0]] === Object.entries(f)[0][1])
-          )
-      )
-      .map(s => s.phoneNumber)
+    const recipients = getRecipients(subscriptions, activeFilters)
 
     const msg = `${data.msg}\n${data.unsubMsg}`
 
