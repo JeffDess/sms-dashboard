@@ -9,3 +9,13 @@ export function getRecipients (subscriptions, filters) {
     )
     .map(s => s.phoneNumber)
 }
+
+export function getActiveFilters (filters) {
+  return Object.entries(filters).map(f =>
+    Object.entries(f[1])
+      .filter(v => v[1] === true)
+      .map(r => {
+        return { [f[0]]: r[0] }
+      })
+  )
+}
