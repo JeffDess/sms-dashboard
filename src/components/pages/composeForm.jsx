@@ -99,15 +99,16 @@ function Compose () {
 
   useEffect(
     () => {
-      setData({ ...data, fullMsg: `${data.msg}\n${data.unsubMsg}` })
+      const fullMsg = `${data.msg}\n${data.unsubMsg}`
+      const smsInfo = splitter.split(fullMsg)
+
+      setData({ ...data, fullMsg: fullMsg })
+
       setStats({
         ...stats,
-        characters: { ...stats.characters, value: data.fullMsg.length },
-        bytes: { ...stats.bytes, value: splitter.split(data.fullMsg).bytes },
-        segments: {
-          ...stats.segments,
-          value: splitter.split(data.fullMsg).parts.length
-        }
+        characters: { ...stats.characters, value: fullMsg.length },
+        bytes: { ...stats.bytes, value: smsInfo.bytes },
+        segments: { ...stats.segments, value: smsInfo.parts.length }
       })
     },
     [data]
