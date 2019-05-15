@@ -67,11 +67,11 @@ function Compose () {
   const [filters, setFilters] = useState({})
   const [errors, setErrors] = useState({})
   const [stats, setStats] = useState({
-    characters: { label: 'Character Count', value: 0 },
-    bytes: { label: 'Byte Count', value: 0 },
+    characters: { label: 'Characters', value: 0 },
+    bytes: { label: 'Bytes', value: 0 },
     segments: { label: 'Segments', value: 1 },
     recipients: { label: 'Recipients', value: 0 },
-    cost: { label: 'Cost', value: '0$' }
+    cost: { label: 'Est. Cost', value: '0$' }
   })
 
   const doSubmit = () => {
@@ -114,7 +114,7 @@ function Compose () {
         characters: { ...stats.characters, value: fullMsg.length },
         bytes: { ...stats.bytes, value: smsInfo.bytes },
         segments: { ...stats.segments, value: smsInfo.parts.length },
-        cost: { ...stats.cost, value: `${cost} ${$}` }
+        cost: { ...stats.cost, value: `${cost}${$}` }
       })
     },
     [data]
