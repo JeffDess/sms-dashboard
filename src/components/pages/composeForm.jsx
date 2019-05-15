@@ -10,13 +10,15 @@ import InputField from '../common/form/inputField'
 import FormFilters from '../common/form/formFilters'
 import db from '../../db.json'
 import { sendSms } from '../../services/smsService'
-import { getRecipients } from '../../utils/compose'
+import ComposeStats from '../widgets/composeStats'
+import { getRecipients, getActiveFilters } from '../../utils/compose'
 
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    marginTop: theme.spacing(2)
   },
   fieldset: {
     border: 'none',
@@ -41,6 +43,7 @@ const schema = {
     .label('Unsubscribe text')
     .error(() => ({ message: 'Unsubscribe text is required.' })),
   fullMsg: Joi.string(),
+  recipients: Joi.array()
 }
 
 const values = {
@@ -55,26 +58,22 @@ function Compose () {
   const [data, setData] = useState({
     msg: '',
     unsubMsg: values.unsubMsg,
-    fullMsg: ''
+    fullMsg: '',
+    recipients: []
   })
   const [filters, setFilters] = useState({})
   const [errors, setErrors] = useState({})
+  const [stats, setStats] = useState({
+    characters: { label: 'Character Count', value: 0 },
+    bytes: { label: 'Byte Count', value: 0 },
+    segments: { label: 'Segments', value: 0 },
+    recipients: { label: 'Recipients', value: 0 },
+    cost: { label: 'Cost', value: '0$' }
+  })
 
   const doSubmit = () => {
-    const activeFilters = Object.entries(filters).map(f =>
-      Object.entries(f[1])
-        .filter(v => v[1] === true)
-        .map(r => {
-          return { [f[0]]: r[0] }
-        })
-    )
-
-    const recipients = getRecipients(subscriptions, activeFilters)
-
-    const msg = `${data.msg}\n${data.unsubMsg}`
-
     try {
-      sendSms(msg, recipients)
+      sendSms(data.fullMsg, data.recipients)
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const newErrors = { ...errors }
@@ -101,11 +100,26 @@ function Compose () {
     },
     [data]
   )
+
+  useEffect(
+    () => {
+      const activeFilters = getActiveFilters(filters)
+      const recipients = getRecipients(subscriptions, activeFilters)
+      setData({ ...data, recipients: recipients })
+      setStats({
+        ...stats,
+        recipients: { ...stats.recipients, value: recipients.length }
+      })
+    },
+    [filters]
+  )
+
   return (
     <React.Fragment>
       <Typography component='h1' variant='h3' gutterBottom>
         Send a SMS
       </Typography>
+      <ComposeStats rows={stats} />
       <Paper>
         <Form
           schema={schema}
