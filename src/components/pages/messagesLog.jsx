@@ -1,25 +1,12 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import SortedTable from '../common/table/sortedTable'
-import { camelToNormalCase } from '../../utils/strings'
+import { generateHeaders } from '../../utils/tables'
 import db from '../../db.json'
 
-function generateHeaders (rows) {
-  return [
-    ...new Set(
-      rows.map(s =>
-        Object.keys(s).map(k => ({
-          id: k,
-          label: camelToNormalCase(k)
-        }))
-      )
-    )
-  ].reduce((acc, x) => acc.indexOf(x) && x)
-}
-
 function MessagesLog () {
-  const [headers] = React.useState(generateHeaders(db.messages))
-  const [rows] = React.useState(db.messages)
+  const headers = generateHeaders(db.messages)
+  const rows = db.messages
 
   return (
     <React.Fragment>
