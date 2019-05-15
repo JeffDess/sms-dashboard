@@ -18,7 +18,7 @@ function App () {
   const [activeTab, setActiveTab] = useState(false)
 
   return (
-    <React.Fragment>
+    <>
       <Navbar username={user && user.name} activeTab={activeTab} />
       <main>
         <Switch>
@@ -56,7 +56,7 @@ function App () {
           <Redirect to='/not-found' />
         </Switch>
       </main>
-    </React.Fragment>
+    </>
   )
 }
 

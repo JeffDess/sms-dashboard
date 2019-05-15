@@ -70,19 +70,19 @@ function Navbar ({ username, activeTab }) {
         <Tabs className={classes.tabs} value={activeTab}>
           <Tab
             label={
-              <React.Fragment>
+              <>
                 <IconButton color='inherit' aria-label='Compose menu icon'>
                   <Edit className='nav__icon' />
                 </IconButton>
                 <div>New SMS</div>
-              </React.Fragment>
+              </>
             }
             to='/compose'
             component={Link}
           />
           <Tab
             label={
-              <React.Fragment>
+              <>
                 <IconButton
                   color='inherit'
                   aria-label='Subscriptions menu icon'
@@ -90,19 +90,19 @@ function Navbar ({ username, activeTab }) {
                   <HowToReg className='nav__icon' />
                 </IconButton>
                 <div>Subscriptions</div>
-              </React.Fragment>
+              </>
             }
             to='/subscriptions'
             component={Link}
           />
           <Tab
             label={
-              <React.Fragment>
+              <>
                 <IconButton color='inherit' aria-label='Messages log menu icon'>
                   <Message className='nav__icon' />
                 </IconButton>
                 <div>Messages Log</div>
-              </React.Fragment>
+              </>
             }
             to='/log'
             component={Link}

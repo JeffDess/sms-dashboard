@@ -8,7 +8,7 @@ function Subscriptions () {
   const rows = db.subscriptions
 
   return (
-    <React.Fragment>
+    <>
       <Typography component='h1' variant='h3' gutterBottom>
         Subscriptions
       </Typography>
@@ -21,7 +21,7 @@ function Subscriptions () {
         rows={rows}
         rowsPerPage={5}
       />
-    </React.Fragment>
+    </>
   )
 }
 

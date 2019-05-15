@@ -9,7 +9,7 @@ function MessagesLog () {
   const rows = db.messages
 
   return (
-    <React.Fragment>
+    <>
       <Typography component='h1' variant='h3'>
         Messages Log
       </Typography>
@@ -23,7 +23,7 @@ function MessagesLog () {
         rows={rows}
         rowsPerPage={5}
       />
-    </React.Fragment>
+    </>
   )
 }
 

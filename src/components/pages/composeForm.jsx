@@ -141,7 +141,7 @@ function Compose () {
   )
 
   return (
-    <React.Fragment>
+    <>
       <Typography component='h1' variant='h3' gutterBottom>
         Send a SMS
       </Typography>
@@ -189,7 +189,7 @@ function Compose () {
           </div>
         </Form>
       </Paper>
-    </React.Fragment>
+    </>
   )
 }
 
