@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
@@ -39,7 +39,8 @@ const schema = {
   unsubMsg: Joi.string()
     .required()
     .label('Unsubscribe text')
-    .error(() => ({ message: 'Unsubscribe text is required.' }))
+    .error(() => ({ message: 'Unsubscribe text is required.' })),
+  fullMsg: Joi.string(),
 }
 
 const values = {
@@ -51,7 +52,11 @@ const subscriptions = db.subscriptions
 
 function Compose () {
   const classes = useStyles()
-  const [data, setData] = useState({ msg: '', unsubMsg: values.unsubMsg })
+  const [data, setData] = useState({
+    msg: '',
+    unsubMsg: values.unsubMsg,
+    fullMsg: ''
+  })
   const [filters, setFilters] = useState({})
   const [errors, setErrors] = useState({})
 
@@ -90,6 +95,12 @@ function Compose () {
     setFilters
   )
 
+  useEffect(
+    () => {
+      setData({ ...data, fullMsg: `${data.msg}\n${data.unsubMsg}` })
+    },
+    [data]
+  )
   return (
     <React.Fragment>
       <Typography component='h1' variant='h3' gutterBottom>
