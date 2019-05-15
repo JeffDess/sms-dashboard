@@ -49,7 +49,7 @@ function Navbar ({ username, activeTab }) {
             style={{ verticalAlign: 'middle' }}
             className={classes.title}
           >
-            SMS SENDER
+            SMS Dashboard
           </Typography>
           {!username && (
             <Button to='/login' component={Link}>
