@@ -103,7 +103,11 @@ function Compose () {
       setStats({
         ...stats,
         characters: { ...stats.characters, value: data.fullMsg.length },
-        bytes: { ...stats.bytes, value: splitter.split(data.fullMsg).bytes }
+        bytes: { ...stats.bytes, value: splitter.split(data.fullMsg).bytes },
+        segments: {
+          ...stats.segments,
+          value: splitter.split(data.fullMsg).parts.length
+        }
       })
     },
     [data]
