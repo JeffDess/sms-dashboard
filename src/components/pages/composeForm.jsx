@@ -52,6 +52,8 @@ const values = {
 }
 
 const subscriptions = db.subscriptions
+const $ = process.env.REACT_APP_CURRENCY_SYMBOL
+const costPerSegment = process.env.REACT_APP_COST_PER_SEGMENT
 
 function Compose () {
   const classes = useStyles()
@@ -66,7 +68,7 @@ function Compose () {
   const [stats, setStats] = useState({
     characters: { label: 'Character Count', value: 0 },
     bytes: { label: 'Byte Count', value: 0 },
-    segments: { label: 'Segments', value: 0 },
+    segments: { label: 'Segments', value: 1 },
     recipients: { label: 'Recipients', value: 0 },
     cost: { label: 'Cost', value: '0$' }
   })
@@ -109,10 +111,16 @@ function Compose () {
     () => {
       const activeFilters = getActiveFilters(filters)
       const recipients = getRecipients(subscriptions, activeFilters)
+      const cost = recipients.length * stats.segments.value * costPerSegment
+
       setData({ ...data, recipients: recipients })
       setStats({
         ...stats,
-        recipients: { ...stats.recipients, value: recipients.length }
+        recipients: { ...stats.recipients, value: recipients.length },
+        cost: {
+          ...stats.cost,
+          value: `${cost.toFixed(2)} ${$}`
+        }
       })
     },
     [filters]
