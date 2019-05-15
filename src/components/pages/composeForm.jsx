@@ -12,6 +12,7 @@ import db from '../../db.json'
 import { sendSms } from '../../services/smsService'
 import ComposeStats from '../widgets/composeStats'
 import { getRecipients, getActiveFilters } from '../../utils/compose'
+import splitter from 'split-sms'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -101,7 +102,8 @@ function Compose () {
       setData({ ...data, fullMsg: `${data.msg}\n${data.unsubMsg}` })
       setStats({
         ...stats,
-        characters: { ...stats.characters, value: data.fullMsg.length }
+        characters: { ...stats.characters, value: data.fullMsg.length },
+        bytes: { ...stats.bytes, value: splitter.split(data.fullMsg).bytes }
       })
     },
     [data]
