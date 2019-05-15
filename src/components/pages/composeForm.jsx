@@ -97,6 +97,10 @@ function Compose () {
   useEffect(
     () => {
       setData({ ...data, fullMsg: `${data.msg}\n${data.unsubMsg}` })
+      setStats({
+        ...stats,
+        characters: { ...stats.characters, value: data.fullMsg.length }
+      })
     },
     [data]
   )
