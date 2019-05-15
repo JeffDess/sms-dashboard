@@ -97,12 +97,6 @@ function SortedTable ({ caption, rows, rowsPerPage, order, orderBy }) {
 SortedTable.propTypes = {
   caption: PropTypes.string.isRequired,
   rows: PropTypes.array.isRequired,
-  headers: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
-    }).isRequired
-  ).isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   rowsPerPage: PropTypes.number.isRequired
