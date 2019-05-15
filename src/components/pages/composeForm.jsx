@@ -11,7 +11,7 @@ import FormFilters from '../common/form/formFilters'
 import db from '../../db.json'
 import { sendSms } from '../../services/smsService'
 import ComposeStats from '../widgets/composeStats'
-import { getRecipients, getActiveFilters } from '../../utils/compose'
+import { getRecipients, getActiveFilters, getCost } from '../../utils/compose'
 import splitter from 'split-sms'
 
 const useStyles = makeStyles(theme => ({
@@ -101,6 +101,11 @@ function Compose () {
     () => {
       const fullMsg = `${data.msg}\n${data.unsubMsg}`
       const smsInfo = splitter.split(fullMsg)
+      const cost = getCost(
+        stats.recipients.value,
+        stats.segments.value,
+        costPerSegment
+      )
 
       setData({ ...data, fullMsg: fullMsg })
 
@@ -108,7 +113,8 @@ function Compose () {
         ...stats,
         characters: { ...stats.characters, value: fullMsg.length },
         bytes: { ...stats.bytes, value: smsInfo.bytes },
-        segments: { ...stats.segments, value: smsInfo.parts.length }
+        segments: { ...stats.segments, value: smsInfo.parts.length },
+        cost: { ...stats.cost, value: `${cost} ${$}` }
       })
     },
     [data]
@@ -118,16 +124,17 @@ function Compose () {
     () => {
       const activeFilters = getActiveFilters(filters)
       const recipients = getRecipients(subscriptions, activeFilters)
-      const cost = recipients.length * stats.segments.value * costPerSegment
+      const cost = getCost(
+        recipients.length,
+        stats.segments.value,
+        costPerSegment
+      )
 
       setData({ ...data, recipients: recipients })
       setStats({
         ...stats,
         recipients: { ...stats.recipients, value: recipients.length },
-        cost: {
-          ...stats.cost,
-          value: `${cost.toFixed(2)} ${$}`
-        }
+        cost: { ...stats.cost, value: `${cost} ${$}` }
       })
     },
     [filters]

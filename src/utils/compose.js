@@ -19,3 +19,7 @@ export function getActiveFilters (filters) {
       })
   )
 }
+
+export function getCost (nbRecipients, segments, cost) {
+  return (nbRecipients * segments * cost).toFixed(2)
+}
