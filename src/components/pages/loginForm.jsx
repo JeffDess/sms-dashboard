@@ -63,7 +63,7 @@ function LoginForm ({ setUser }) {
 
   const helper = formHelper(schema, data, doSubmit, setErrors, setData, errors)
 
-  if (auth.getCurrentUser()) return <Redirect to='/' />
+  if (auth.getCurrentUser()) return <Redirect to='/compose' />
 
   return (
     <Paper>
