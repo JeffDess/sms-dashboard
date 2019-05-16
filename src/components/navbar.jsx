@@ -87,47 +87,52 @@ function Navbar ({ username, activeTab }) {
             </div>
           )}
         </Toolbar>
-        <Tabs className={classes.tabs} value={activeTab}>
-          <Tab
-            label={
-              <>
-                <IconButton color='inherit' aria-label='Compose menu icon'>
-                  <Edit className='nav__icon' />
-                </IconButton>
-                <div>New SMS</div>
-              </>
-            }
-            to='/compose'
-            component={Link}
-          />
-          <Tab
-            label={
-              <>
-                <IconButton
-                  color='inherit'
-                  aria-label='Subscriptions menu icon'
-                >
-                  <HowToReg className='nav__icon' />
-                </IconButton>
-                <div>Subscriptions</div>
-              </>
-            }
-            to='/subscriptions'
-            component={Link}
-          />
-          <Tab
-            label={
-              <>
-                <IconButton color='inherit' aria-label='Messages log menu icon'>
-                  <Message className='nav__icon' />
-                </IconButton>
-                <div>Messages Log</div>
-              </>
-            }
-            to='/log'
-            component={Link}
-          />
-        </Tabs>
+        {username && (
+          <Tabs className={classes.tabs} value={activeTab}>
+            <Tab
+              label={
+                <>
+                  <IconButton color='inherit' aria-label='Compose menu icon'>
+                    <Edit className='nav__icon' />
+                  </IconButton>
+                  <div>New SMS</div>
+                </>
+              }
+              to='/compose'
+              component={Link}
+            />
+            <Tab
+              label={
+                <>
+                  <IconButton
+                    color='inherit'
+                    aria-label='Subscriptions menu icon'
+                  >
+                    <HowToReg className='nav__icon' />
+                  </IconButton>
+                  <div>Subscriptions</div>
+                </>
+              }
+              to='/subscriptions'
+              component={Link}
+            />
+            <Tab
+              label={
+                <>
+                  <IconButton
+                    color='inherit'
+                    aria-label='Messages log menu icon'
+                  >
+                    <Message className='nav__icon' />
+                  </IconButton>
+                  <div>Messages Log</div>
+                </>
+              }
+              to='/log'
+              component={Link}
+            />
+          </Tabs>
+        )}
       </AppBar>
     </nav>
   )

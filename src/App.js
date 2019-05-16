@@ -52,7 +52,14 @@ function App () {
             }}
           />
           <Route path='/not-found' component={NotFound} />
-          <Route path='/' component={Home} exact />
+          <Route
+            path='/'
+            render={() => {
+              setActiveTab(false)
+              return <Home username={user && user.name} />
+            }}
+            exact
+          />
           <Redirect to='/not-found' />
         </Switch>
       </main>
