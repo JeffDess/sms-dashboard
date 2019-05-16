@@ -40,7 +40,6 @@ const formHelper = (
 
       const errors = validateForm(data, schema)
       setErrors(errors || {})
-      console.log(errors)
       if (errors) return
       doSubmit()
     }
