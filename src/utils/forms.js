@@ -73,7 +73,7 @@ const formHelper = (
     handleSelect: (filter, prop) => {
       setFilters({
         ...filters,
-        [filter]: { [prop]: true }
+        [filter]: prop === '' ? {} : { [prop]: true }
       })
     }
   })

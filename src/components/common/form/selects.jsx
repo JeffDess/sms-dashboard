@@ -41,7 +41,7 @@ function Selects ({ listId, label, options, filters, onSelect }) {
         className={classes.selectEmpty}
       >
         <MenuItem value=''>
-          <em>None</em>
+          <em>All</em>
         </MenuItem>
         {options.map(o => (
           <MenuItem value={o} key={o}>
