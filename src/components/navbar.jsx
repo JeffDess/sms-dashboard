@@ -23,14 +23,26 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: blue[800],
     marginBottom: theme.spacing(2)
   },
+  toolbar: {
+    justifyContent: 'space-between',
+    flexWrap: 'wrap'
+  },
   tabs: {
     flexGrow: 1,
     backgroundColor: blue[700]
   },
+  personal: {
+    display: 'flex',
+    margin: theme.spacing(1)
+  },
+  logo: {
+    color: 'white',
+    margin: theme.spacing(1)
+  },
   title: {
-    flexGrow: 1,
-    fontSize: '2.5rem',
-    marginTop: '0.3rem'
+    fontSize: '2.7rem',
+    marginTop: '0.1rem',
+    textTransform: 'none'
   }
 }))
 
@@ -40,32 +52,39 @@ function Navbar ({ username, activeTab }) {
   return (
     <nav className={classes.root}>
       <AppBar position='static' className={classes.root}>
-        <Toolbar>
-          <PhoneIphone fontSize='large' />
-          <Typography
+        <Toolbar className={classes.toolbar}>
+          <Button
             to='/'
-            variant='h1'
-            color='inherit'
-            fontSize='small'
-            style={{ verticalAlign: 'middle' }}
-            className={classes.title}
+            title='homepage'
+            component={Link}
+            className={classes.logo}
           >
-            SMS Dashboard
-          </Typography>
+            <PhoneIphone fontSize='large' />
+            <Typography
+              className={classes.title}
+              to='/'
+              variant='h1'
+              color='inherit'
+              fontSize='small'
+              style={{ verticalAlign: 'middle' }}
+            >
+              SMS Dashboard
+            </Typography>
+          </Button>
           {!username && (
             <Button to='/login' component={Link}>
               Login
             </Button>
           )}
           {username && (
-            <Avatar to='/profile'>
-              <Person />
-            </Avatar>
-          )}
-          {username && (
-            <Button to='/logout' component={Link}>
-              Logout
-            </Button>
+            <div className={classes.personal}>
+              <Avatar to='/profile'>
+                <Person />
+              </Avatar>
+              <Button to='/logout' component={Link}>
+                Logout
+              </Button>
+            </div>
           )}
         </Toolbar>
         <Tabs className={classes.tabs} value={activeTab}>
