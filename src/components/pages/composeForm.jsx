@@ -13,6 +13,7 @@ import ComposeStats from '../widgets/composeStats'
 import { getRecipients, getActiveFilters, getCost } from '../../utils/compose'
 import splitter from 'split-sms'
 import { getSubscriptions } from '../../services/subscriptionsService'
+import { fetchData } from '../../utils/fetch'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -141,12 +142,7 @@ function Compose () {
   )
 
   useEffect(() => {
-    async function fetchSubscriptions () {
-      const res = await getSubscriptions()
-      setSubscriptions(res.data)
-    }
-
-    fetchSubscriptions()
+    fetchData(getSubscriptions, setSubscriptions)
   }, [])
 
   return (

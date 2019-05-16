@@ -3,17 +3,13 @@ import Typography from '@material-ui/core/Typography'
 import SortedTable from '../common/table/sortedTable'
 import TableStats from '../widgets/tableStats'
 import { getSubscriptions } from '../../services/subscriptionsService'
+import { fetchData } from '../../utils/fetch'
 
 function Subscriptions () {
   const [rows, setRows] = useState([{}])
 
   useEffect(() => {
-    async function fetchSubscriptions () {
-      const res = await getSubscriptions()
-      setRows(res.data)
-    }
-
-    fetchSubscriptions()
+    fetchData(getSubscriptions, setRows)
   }, [])
 
   return (

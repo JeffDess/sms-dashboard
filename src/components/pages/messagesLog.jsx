@@ -3,19 +3,15 @@ import Typography from '@material-ui/core/Typography'
 import SortedTable from '../common/table/sortedTable'
 import { generateHeaders } from '../../utils/tables'
 import { getMessages } from '../../services/messagesService'
+import { fetchData } from '../../utils/fetch'
 
 function MessagesLog () {
   const [headers, setHeaders] = useState([{}])
   const [rows, setRows] = useState([{}])
 
   useEffect(() => {
-    async function fetchMessages () {
-      const messages = await getMessages()
-      setHeaders(generateHeaders(messages.data))
-      setRows(messages.data)
-    }
-
-    fetchMessages()
+    fetchData(getMessages, setRows)
+    setHeaders(generateHeaders(rows))
   }, [])
 
   return (
