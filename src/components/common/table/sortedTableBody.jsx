@@ -15,7 +15,7 @@ function SortedTableBody ({ order, orderBy, rows, page, rowsPerPage }) {
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         .map(n => {
           return (
-            <TableRow hover key={Object.values(n)[0]}>
+            <TableRow hover key={Object.values(n)[0] || 0}>
               {Object.values(n).map(r => (
                 <TableCell key={r}>{r}</TableCell>
               ))}
