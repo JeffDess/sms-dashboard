@@ -98,6 +98,26 @@ function Compose () {
     setFilters
   )
 
+  useEffect(() => {
+    fetchData(getSubscriptions, setSubscriptions)
+  }, [])
+
+  useEffect(
+    () => {
+      const cost = getCost(
+        stats.recipients.value,
+        stats.segments.value,
+        costPerSegment
+      )
+
+      setStats({
+        ...stats,
+        cost: { ...stats.cost, value: `${cost} ${$}` }
+      })
+    },
+    [stats]
+  )
+
   useEffect(
     () => {
       const fullMsg = `${data.msg}\n${data.unsubMsg}`
@@ -125,25 +145,15 @@ function Compose () {
     () => {
       const activeFilters = getActiveFilters(filters)
       const recipients = getRecipients(subscriptions, activeFilters)
-      const cost = getCost(
-        recipients.length,
-        stats.segments.value,
-        costPerSegment
-      )
 
       setData({ ...data, recipients: recipients })
       setStats({
         ...stats,
-        recipients: { ...stats.recipients, value: recipients.length },
-        cost: { ...stats.cost, value: `${cost} ${$}` }
+        recipients: { ...stats.recipients, value: recipients.length }
       })
     },
     [filters, subscriptions]
   )
-
-  useEffect(() => {
-    fetchData(getSubscriptions, setSubscriptions)
-  }, [])
 
   return (
     <>
