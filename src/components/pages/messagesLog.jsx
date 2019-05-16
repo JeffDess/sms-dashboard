@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Typography from '@material-ui/core/Typography'
 import SortedTable from '../common/table/sortedTable'
 import { generateHeaders } from '../../utils/tables'
-import db from '../../db.json'
+import { getMessages } from '../../services/messagesService'
 
 function MessagesLog () {
-  const headers = generateHeaders(db.messages)
-  const rows = db.messages
+  const [headers, setHeaders] = useState([{}])
+  const [rows, setRows] = useState([{}])
+
+  useEffect(() => {
+    async function fetchMessages () {
+      const messages = await getMessages()
+      setHeaders(generateHeaders(messages.data))
+      setRows(messages.data)
+    }
+
+    fetchMessages()
+  }, [])
 
   return (
     <>
@@ -19,7 +29,7 @@ function MessagesLog () {
         caption='Sent messages'
         headers={headers}
         order='asc'
-        orderBy={headers[0].id}
+        orderBy='timestamp'
         rows={rows}
         rowsPerPage={5}
       />
