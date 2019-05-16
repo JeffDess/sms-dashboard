@@ -20,7 +20,8 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: blue[800]
+    backgroundColor: blue[800],
+    marginBottom: theme.spacing(2)
   },
   tabs: {
     flexGrow: 1,
