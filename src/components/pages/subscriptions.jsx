@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Typography from '@material-ui/core/Typography'
 import SortedTable from '../common/table/sortedTable'
 import TableStats from '../widgets/tableStats'
-import db from '../../db.json'
+import { getSubscriptions } from '../../services/subscriptionsService'
 
 function Subscriptions () {
-  const rows = db.subscriptions
+  const [rows, setRows] = useState([{}])
+
+  useEffect(() => {
+    async function fetchSubscriptions () {
+      const res = await getSubscriptions()
+      setRows(res.data)
+    }
+
+    fetchSubscriptions()
+  }, [])
 
   return (
     <>

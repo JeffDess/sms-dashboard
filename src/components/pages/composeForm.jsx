@@ -8,11 +8,11 @@ import formHelper from '../../utils/forms'
 import SubmitButton from '../common/form/submitButton'
 import InputField from '../common/form/inputField'
 import FormFilters from '../common/form/formFilters'
-import db from '../../db.json'
 import { sendSms } from '../../services/smsService'
 import ComposeStats from '../widgets/composeStats'
 import { getRecipients, getActiveFilters, getCost } from '../../utils/compose'
 import splitter from 'split-sms'
+import { getSubscriptions } from '../../services/subscriptionsService'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -52,7 +52,6 @@ const values = {
   unsubMsg: 'Reply STOP to unsubscribe.'
 }
 
-const subscriptions = db.subscriptions
 const $ = process.env.REACT_APP_CURRENCY_SYMBOL
 const costPerSegment = process.env.REACT_APP_COST_PER_SEGMENT
 
@@ -73,6 +72,7 @@ function Compose () {
     recipients: { label: 'Recipients', value: 0 },
     cost: { label: 'Est. Cost', value: '0$' }
   })
+  const [subscriptions, setSubscriptions] = useState([{}])
 
   const doSubmit = () => {
     try {
@@ -137,8 +137,17 @@ function Compose () {
         cost: { ...stats.cost, value: `${cost} ${$}` }
       })
     },
-    [filters]
+    [filters, subscriptions]
   )
+
+  useEffect(() => {
+    async function fetchSubscriptions () {
+      const res = await getSubscriptions()
+      setSubscriptions(res.data)
+    }
+
+    fetchSubscriptions()
+  }, [])
 
   return (
     <>
