@@ -48,6 +48,7 @@ const useStyles = makeStyles(theme => ({
 
 function Navbar ({ username, activeTab }) {
   const classes = useStyles()
+  const title = process.env.REACT_APP_NAME || 'SMS Dashboard'
 
   return (
     <nav className={classes.root}>
@@ -68,7 +69,7 @@ function Navbar ({ username, activeTab }) {
               fontSize='small'
               style={{ verticalAlign: 'middle' }}
             >
-              SMS Dashboard
+              {title}
             </Typography>
           </Button>
           {!username && (
