@@ -13,6 +13,20 @@ This app allows you to:
 
 This is a demo app that uses fake static data to illustrate its functionalities. It is by no mean ready for production. In order to make it work, you would need to implement a few calls on your own in the _services_ directory first and perhaps a few missing features.
 
+## Quickstart
+
+Well, just clone the repo and then you know the drill :
+
+```sh
+npm install
+npm start
+```
+
+Then you can log in by using the demo crendentials:
+
+* Username: user@domain.com
+* Password: 12345
+
 ## Features
 
 ### Send a SMS
