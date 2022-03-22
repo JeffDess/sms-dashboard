@@ -42,7 +42,7 @@ If you try to send the message, nothing will happen as no messaging service has 
 ### Browse Subscriptions
 ![image](https://user-images.githubusercontent.com/6100619/159527479-8ee21aee-2bf2-49fe-8d4d-76194a91b082.png)
 
-This section displays information about the audience and consents. Note that the system allows to unsubscribe while keeping an history of what happened for each phone number (useful to comply with regulations).
+This section displays information about the audience and consents. Note that the table will adapt to the JSON object it receives from your backend. Say you were to add a consent field to each subscription, the table will expand to show that new column. You can play around with db.json to test your own schema. 
 
 ### View Message Log
 ![image](https://user-images.githubusercontent.com/6100619/159527595-84312e45-9766-4985-9b33-f7cba8d4b6b1.png)
