@@ -47,4 +47,4 @@ This section displays information about the audience and consents. Note that the
 ### View Message Log
 ![image](https://user-images.githubusercontent.com/6100619/159527595-84312e45-9766-4985-9b33-f7cba8d4b6b1.png)
 
-The message log keeps track of everything that is sent through the app.
+The message log keeps track of everything that is sent through the app. The table will ajust to the schema that is provided by the backend.
